@@ -12,3 +12,6 @@ export const LOGO =
       accept: 'application/json',
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkODEzYWVhOGIwMDMwZTE0NjJmZjVkNjQ3ODEyZTY0MSIsInN1YiI6IjY1Mjk0ZDM3Mzc4MDYyMDExYzA5YmYwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8HnEPIy5djNgy17HoMKtjH2Lz4mY3zaUOoBOEpqGWeQ'
     }};
+
+
+    export const POSTER_IMG_CDN_URL = "https://image.tmdb.org/t/p/w500/"
