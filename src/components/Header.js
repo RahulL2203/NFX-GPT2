@@ -4,13 +4,16 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser,removeUser } from '../utils/userSlice';
-import { LOGO, USER_AVATAR } from '../utils/constants';
+import { LOGO, SUPPORTED_LANGUAGES, USER_AVATAR } from '../utils/constants';
+import { toggleGPTSearchView } from '../utils/gptSlice';
+import { changeLanguage } from '../utils/configSlice';
 
 const Header = () => {
 
   const dispatch = useDispatch(); 
   const navigate = useNavigate();
   const user = useSelector(store => store.user)
+  const showGPTSearch = useSelector(store => store.gpt.showGPTSearch)
 
   useEffect(()=>{
 
@@ -34,6 +37,16 @@ const Header = () => {
     //UnSubscribed when component Unmounts
     return ()=> unSubscribe();
   },[])
+
+  const handleLanguageChange = (e)=>{
+      dispatch(changeLanguage(e.target.value))
+  }
+  const handleGPTSearchClick = ()=>{
+    //Toggle GPT Search
+
+    dispatch(toggleGPTSearchView());
+  }
+
   const handleSignOut = ()=>{
     signOut(auth).then(() => {
       
@@ -43,18 +56,30 @@ const Header = () => {
     });
   }
   return (
-    <div className='absolute px-8 py-2 w-screen bg-gradient-to-b from-black z-10 flex justify-between'>
+    <div className='w-screen absolute px-8 py-2  bg-gradient-to-b from-black z-10 flex justify-between'>
         <img className='w-48'
         src = {LOGO }
         alt = "logo"/>
-        {user && <div className='flex items-center '>
-          <img className='w-10 h-10 rounded-xl'
-          src={USER_AVATAR}
-          alt = "user-icon"/>
-          <button className='bg-red-500 p-2 m-2 rounded-lg text-white font-bold'
-          onClick={handleSignOut}>
-            Sign Out</button>
-        </div>}
+        {user && (
+        <div className='flex items-center '>
+
+          { showGPTSearch && 
+            
+            (<select className='bg-gray-800 text-white p-2 m-2 rounded-lg' onChange={handleLanguageChange}>
+                 {SUPPORTED_LANGUAGES.map((lang)=><option key = {lang.identifier} value={lang.identifier}>{lang.name}</option>)}
+          </select>)}
+        <button className='bg-blue-500 p-2 m-2 rounded-lg text-white opacity-50 hover:opacity-100'
+            onClick={handleGPTSearchClick} >
+               {showGPTSearch? "Homepage": "GPT Search"}
+        </button>""
+          <img className='w-10 h-10 rounded-xl bg-white opacity-50 hover:opacity-100'
+              src={USER_AVATAR}
+              alt = "user-icon"/>
+          <button className='bg-red-500 p-2 m-2 rounded-lg text-white opacity-50 hover:opacity-100'
+            onClick={handleSignOut}>
+             Sign Out
+          </button>
+        </div>)}
     </div>
   )
 }
