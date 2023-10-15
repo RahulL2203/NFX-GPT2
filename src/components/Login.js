@@ -97,30 +97,32 @@ const Login = () => {
     <div>
        <Header/>
        <div className='absolute '>
-            <img src={BACKGROUND_IMG}
+            <img className="object-cover h-screen md:h-fit" src={BACKGROUND_IMG}
             alt ="background"/>
         </div>
         <form 
          onSubmit={(e)=>e.preventDefault()}
-        className='absolute p-12 bg-black w-3/12 my-36 mx-auto right-0 left-0 text-white rounded-xl bg-opacity-80'>  
-            <h3 className='text-2xl font-bold'>
+        className='absolute p-12 bg-black md:w-3/12 w-full my-36 mx-auto right-0 left-0 text-white rounded-xl bg-opacity-80'>  
+
+                         
+            <h3 className='md:text-2xl text-lg font-bold'>
               {isSignInForm ? "Sign In" : "Sign Up"}</h3>
             { !isSignInForm &&
             <input 
              ref = {name}
             type ="text" 
               placeholder='Enter ur Full Name' 
-              className='p-3 my-4 w-full rounded-md bg-gray-700'/>}
+              className='md:p-3 p-2 md:my-4 my-3 w-full rounded-md bg-gray-700'/>}
             <input 
              ref = {email}
               type ="text" 
               placeholder='Enter ur Email Address' 
-              className='p-3 my-4 w-full rounded-md bg-gray-700'/>
+              className='md:p-3 p-2 md:my-4 my-3 w-full rounded-md bg-gray-700'/>
             <input 
               ref = {password} 
-              type ="password" placeholder='Enter ur Passsword' className='p-3 my-4 w-full rounded-md bg-gray-700'/>
+              type ="password" placeholder='Enter ur Passsword' className='md:p-3 p-2 my-4 w-full rounded-md bg-gray-700'/>
             <p className='font-bold text-red-700'>{errorMesssage}</p>
-            <button className='bg-red-700 text-white p-4 my-6  w-full rounded-lg' onClick={handleButtonClick}>
+            <button className='bg-red-700 text-white md:p-4 p-3 md:my-6 my-4 w-full rounded-lg' onClick={handleButtonClick}>
                 {isSignInForm ? "Sign In" : "Sign Up"}
             </button>
             <p className='py-4 cursor-pointer' onClick={toggleSignInForm}>{isSignInForm ? "New to Netflix ? Sign Up now" : "Already a User ? Sign In now"}</p>

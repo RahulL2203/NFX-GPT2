@@ -56,12 +56,12 @@ const Header = () => {
     });
   }
   return (
-    <div className='w-screen absolute px-8 py-2  bg-gradient-to-b from-black z-10 flex justify-between'>
-        <img className='w-48'
+    <div className='w-screen absolute px-8 py-2  bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between'>
+        <img className='w-48 mx-auto md:mx-0'
         src = {LOGO }
         alt = "logo"/>
         {user && (
-        <div className='flex items-center '>
+        <div className='flex md:items-center justify-between'>
 
           { showGPTSearch && 
             
@@ -71,8 +71,8 @@ const Header = () => {
         <button className='bg-blue-500 p-2 m-2 rounded-lg text-white opacity-50 hover:opacity-100'
             onClick={handleGPTSearchClick} >
                {showGPTSearch? "Homepage": "GPT Search"}
-        </button>""
-          <img className='w-10 h-10 rounded-xl bg-white opacity-50 hover:opacity-100'
+        </button>
+          <img className='w-10 h-10 hidden md:inline-block rounded-xl bg-white opacity-50 hover:opacity-100'
               src={USER_AVATAR}
               alt = "user-icon"/>
           <button className='bg-red-500 p-2 m-2 rounded-lg text-white opacity-50 hover:opacity-100'
